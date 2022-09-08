@@ -1,5 +1,5 @@
 #![feature(array_windows)]
-use std::{fs, cmp::Ordering};
+use std::fs;
 
 fn main() {
     // Read input into a string
@@ -8,7 +8,7 @@ fn main() {
         // Split the whitespace
         .split_whitespace()
         // Parse each thing seperated by white space into an isize
-        .map(|num| num.trim().parse::<isize>().unwrap() )
+        .map(|num| num.trim().parse::<isize>().unwrap())
         // Collect each isize into a Vec<isize>
         .collect();
 
@@ -17,7 +17,7 @@ fn main() {
     // Zip up the regular iterator of input to the iterator + 1 (the next number)
     for (last_depth, current_depth) in input.iter().zip(input.iter().skip(1)) {
         // If the current depth is greater than the last_depth ...
-        if current_depth.cmp(&last_depth) == Ordering::Greater {
+        if last_depth < current_depth {
             // Add one to our counter
             larger_than_prev += 1;
         }
@@ -31,7 +31,7 @@ fn main() {
         let prev = a1 + a2_b1 + a3_b2;
         let curr = a2_b1 + a3_b2 + b3;
 
-        if curr.cmp(&prev) == Ordering::Greater {
+        if prev < curr {
             larger_than_prev += 1;
         }
     }
